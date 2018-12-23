@@ -25,6 +25,26 @@ class FileLoaderModel():
 
     def getProfils(self):
         return self.profils
+
+class FileWritterModel():
+    
+    file_name = "SpeedrunGui_profils.xml"
+
+    def __init__(self, profil, path="./"):
+        self.__path = path
+        self.__xmltree = etree.parse(path + self.file_name)
+        self.profil = profil
+        self.path = path
+
+    def update_best_segment(self, id_level, new_best_segment):
+        elt = self.__xmltree.xpath("/speedrunGui-Project/profil[@id='%s']/data/level[@id='%s']" % (self.profil, id_level))[0]
+        elt.set("best-segment", "0"+new_best_segment.__str__())
+    
+    def save_update(self):
+        file = open(self.path + self.file_name, "w")
+        file.write(etree.tostring(self.__xmltree))
+        file.close()
+
     
 class ProfilComponent(Frame, object):
 
@@ -48,4 +68,4 @@ class ProfilsPanel(Frame, object):
             column += 1
 
     def profilSelected(self, id):
-        self.parent.initialise_speedrun(self.__profils[int(id)]['data'].getchildren())
+        self.parent.initialise_speedrun(self.__profils[int(id)])
