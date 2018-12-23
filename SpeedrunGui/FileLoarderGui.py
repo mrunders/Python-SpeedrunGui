@@ -1,5 +1,6 @@
 from Tkinter import *
 from lxml import etree
+from Controler import *
 
 class FileLoaderModel():
 
@@ -28,44 +29,23 @@ class FileLoaderModel():
 
 class FileWritterModel():
     
+    path = "./"
     file_name = "SpeedrunGui_profils.xml"
+    xmltree = etree.parse(path + file_name)
+    profil = None
 
-    def __init__(self, profil, path="./"):
-        self.__path = path
-        self.__xmltree = etree.parse(path + self.file_name)
-        self.profil = profil
-        self.path = path
+    @staticmethod
+    def init(xmltree, profil, path="./"):
+        profil = profil
+        xmltree = xmltree
 
-    def update_best_segment(self, id_level, new_best_segment):
-        elt = self.__xmltree.xpath("/speedrunGui-Project/profil[@id='%s']/data/level[@id='%s']" % (self.profil, id_level))[0]
-        elt.set("best-segment", "0"+new_best_segment.__str__())
+    @staticmethod
+    def update_best_segment(id_level, new_best_segment):
+        elt = xmltree.xpath("/speedrunGui-Project/profil[@id='%s']/data/level[@id='%s']" % (profil, id_level))[0]
+        elt.set("best-segment", "0"+new_best_segment.__str__()) 
     
-    def save_update(self):
-        file = open(self.path + self.file_name, "w")
-        file.write(etree.tostring(self.__xmltree))
+    @staticmethod
+    def save_update():
+        file = open(path + file_name, "w")
+        file.write(etree.tostring(xmltree))
         file.close()
-
-    
-class ProfilComponent(Frame, object):
-
-    def __init__(self, parent, profil):
-        super(ProfilComponent, self).__init__(parent, borderwidth=2, relief=GROOVE)
-        Label(self, text=profil["name"]).grid(row=0, column=0)
-        but = Button(self, text="insert img lul", command=lambda: parent.profilSelected(profil["id"]))
-        but.grid(row=1, column=0)
-
-
-class ProfilsPanel(Frame, object):
-
-    def __init__(self, parent):
-        super(ProfilsPanel, self).__init__(parent)
-        self.__profils = FileLoaderModel().getProfils()
-        self.parent = parent
-
-        column = 0
-        for profil in self.__profils:
-            ProfilComponent(self, profil).grid(row=0, column=column, padx=10, pady=10)
-            column += 1
-
-    def profilSelected(self, id):
-        self.parent.initialise_speedrun(self.__profils[int(id)])
