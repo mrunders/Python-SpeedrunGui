@@ -2,6 +2,8 @@ from datetime import datetime
 
 class Segment():
 
+    null_segment = datetime(99,1,1,0,0,0)
+
     def __init__(self, level):
         self.time_segment = 0
         self.best_segment_str = level.get("best-segment")
@@ -17,14 +19,14 @@ class Segment():
     def get_best_segment_str(self):
 
         try:
-            return self.best_segment.__str__()[11:]
+            return Segment.get_time_from_datetime(self.best_segment)
         except:
             return 0
 
     def get_time_segment_str(self):
 
         try:
-            return self.time_segment.__str__()[11:]
+            return Segment.get_time_from_datetime(self.time_segment)
         except:
             return 0  
 
@@ -45,11 +47,24 @@ class Segment():
         return self.__id
 
     @staticmethod
+    def time_is_null(datetimel):
+        return datetimel == Segment.null_segment
+
+    @staticmethod
+    def minus(datetime_a, datetime_b):
+        tmp = datetime_a - datetime_b
+        return Segment.to_time(tmp.__str__())
+
+    @staticmethod
+    def get_time_from_datetime(datetimel):
+        return datetimel.__str__()[11:]
+
+    @staticmethod
     def to_time(timel):
 
         if type(timel) == str:
             if timel == "":
-                return datetime(99,1,1,0,0,0)
+                return Segment.null_segment
             else:
                 tmp = [int(i) for i in timel.split(":")]
                 return datetime(1,1,1,*tmp)
@@ -58,4 +73,4 @@ class Segment():
             tmp = [int(i) for i in timel[:3]]
             return datetime(1,1,1,*tmp)
         
-        return datetime(99,1,1,0,0,0)
+        return Segment.null_segment

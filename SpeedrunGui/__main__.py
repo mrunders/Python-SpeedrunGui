@@ -30,7 +30,7 @@ class TkFrame():
         self.fenetre = Tk()
 
         self.fenetre.title('SpeedrunerGui Project')
-        self.fenetre.geometry("500x700")
+        self.fenetre.geometry("550x700")
         self.fenetre.resizable(0, 0)
 
         self.initialise_speedrun(FileLoaderModel().getProfils()[0])
