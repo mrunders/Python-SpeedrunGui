@@ -1,6 +1,4 @@
-from Tkinter import *
 from lxml import etree
-from Controler import *
 
 class FileLoaderModel():
 

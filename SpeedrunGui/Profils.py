@@ -1,4 +1,9 @@
-from Tkinter import *
+import platform
+
+if platform.system() == "Windows":
+    from Tkinter import *
+else :
+    from tkinter import *
 
 class ProfilComponent(Frame, object):
 

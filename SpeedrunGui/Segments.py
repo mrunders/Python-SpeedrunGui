@@ -12,7 +12,7 @@ class Segment():
         self.__selected = False
 
     def __str__(self):
-        return "%30s| best:%8s current:%8s" % (self.name, self.best_segment, self.time_segment)
+        return "%20s| best:%8s current:%8s" % (self.name, self.best_segment, self.time_segment)
 
     def get_best_segment_str(self):
         return self.best_segment.__str__()[11:]

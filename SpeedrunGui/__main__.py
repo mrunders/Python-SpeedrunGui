@@ -1,4 +1,10 @@
-from Tkinter import *
+import platform
+
+if platform.system() == "Windows":
+    from Tkinter import *
+else :
+    from tkinter import *
+
 from FileLoarderGui import *
 from Controler import *
 from SpeedrunGui import *
@@ -9,11 +15,14 @@ class OptionsGui(Frame, object):
     def __init__(self, parent, controler):
         super(OptionsGui, self).__init__(parent)
 
-        self.start = Button(self, text="Start", command=lambda: controler.event_start).grid(row=0, column=0)
+        self.start = Button(self, text="Start", command=controler.event_start)
         Button(self, text="Break", command=lambda: None).grid(row=0, column=1)
-        Button(self, text="Stop",  command=lambda: controler.event_stop).grid(row=0, column=2)
+        Button(self, text="Stop",  command=controler.event_stop).grid(row=0, column=2)
         Button(self, text="Reset", command=lambda: None).grid(row=0, column=3)
-        Button(self, text="Save" , command=lambda: controler.event_save).grid(row=0, column=4)
+        self.save  = Button(self, text="Save" , command=controler.event_save)
+
+        self.start.grid(row=0, column=0)
+        self.save.grid(row=0, column=4)
 
 class TkFrame():
 
@@ -43,7 +52,7 @@ class TkFrame():
         self.timer_gui.grid(row=3, column=0)
 
     def event_save(self):
-        FileWritterModel.init(self.id).save_update()
+        self.speedrun.save()
 
     def event_start(self):
         self.timer_gui.run()

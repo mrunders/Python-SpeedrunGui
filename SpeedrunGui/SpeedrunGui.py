@@ -1,4 +1,10 @@
-from Tkinter import *
+import platform
+
+if platform.system() == "Windows":
+    from Tkinter import *
+else :
+    from tkinter import *
+    
 from Controler import *
 from Segments import *
 

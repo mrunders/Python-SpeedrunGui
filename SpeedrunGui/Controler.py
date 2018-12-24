@@ -30,6 +30,15 @@ class Speedrun():
             self.get_segment(self.current_segment-1).deselect()
         self.get_segment(self.current_segment).select()
     
+    def save(self):
+        curent_date = datetime.now()
+        curent_date_str = curent_date.__str__().replace(" ", "_").replace(":", "-")
+        game_name = self.profil["name"]
+        with open("speedrun-" + game_name + "-" + curent_date_str + ".txt", "w") as file:
+            for segment in self.get_segments():
+                file.write(segment.__str__())
+                file.write("\n")
+
     def get_segment(self, id):
         return self.segments[id]
 
