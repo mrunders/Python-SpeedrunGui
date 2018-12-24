@@ -1,0 +1,12 @@
+        Sunny Flight| best:00:00:01 current:00:00:01
+         Dark Hollow| best:00:00:00 current:00:00:00
+          Stone Hill| best:00:00:00 current:00:00:00
+         Town Square| best:00:00:00 current:00:00:00
+              Toasty| best:00:02:46 current:        
+           Artisants| best:00:00:38 current:        
+          Dry Canyon| best:00:05:35 current:        
+          Cliff Town| best:00:05:07 current:        
+        Doctor Shemp| best:00:03:48 current:        
+        Night Flight| best:00:02:25 current:        
+          Ice Cavern| best:00:00:00 current:        
+       Peace Keepers| best:00:00:00 current:        

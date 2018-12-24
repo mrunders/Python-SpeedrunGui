@@ -12,13 +12,21 @@ class Segment():
         self.__selected = False
 
     def __str__(self):
-        return "%20s| best:%8s current:%8s" % (self.name, self.best_segment, self.time_segment)
+        return "%20s| best:%8s current:%8s" % (self.name, self.get_best_segment_str(), self.get_time_segment_str())
 
     def get_best_segment_str(self):
-        return self.best_segment.__str__()[11:]
+
+        try:
+            return self.best_segment.__str__()[11:]
+        except:
+            return 0
 
     def get_time_segment_str(self):
-        return self.time_segment.__str__()[11:]       
+
+        try:
+            return self.time_segment.__str__()[11:]
+        except:
+            return 0  
 
     def update_best_segment(self, new_best_segment):
         self.best_segment = new_best_segment
@@ -32,6 +40,9 @@ class Segment():
     
     def deleselect(self):
         self.selected = False
+
+    def get_id(self):
+        return self.__id
 
     @staticmethod
     def to_time(timel):

@@ -27,23 +27,19 @@ class FileLoaderModel():
 
 class FileWritterModel():
     
-    path = "./"
     file_name = "SpeedrunGui_profils.xml"
-    xmltree = etree.parse(path + file_name)
-    profil = None
 
-    @staticmethod
-    def init(xmltree, profil, path="./"):
-        profil = profil
-        xmltree = xmltree
+    def __init__(self, profil="0", path="./"):
+        self.profil = profil
+        self.path = path
+        self.xmltree = etree.parse(self.path + self.file_name)
 
-    @staticmethod
-    def update_best_segment(id_level, new_best_segment):
-        elt = xmltree.xpath("/speedrunGui-Project/profil[@id='%s']/data/level[@id='%s']" % (profil, id_level))[0]
-        elt.set("best-segment", "0"+new_best_segment.__str__()) 
+    def update_best_segment(self, segment):
+        id_level = segment.get_id()
+        elt = self.xmltree.xpath("/speedrunGui-Project/profil[@id='%s']/data/level[@id='%s']" % (self.profil, id_level))[0]
+        elt.set("best-segment", segment.get_best_segment_str()) 
     
-    @staticmethod
-    def save_update():
-        file = open(path + file_name, "w")
-        file.write(etree.tostring(xmltree))
+    def commit_changes(self):
+        file = open(self.path + self.file_name, "w")
+        file.write(etree.tostring(self.xmltree))
         file.close()
