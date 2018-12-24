@@ -19,10 +19,10 @@ class SegmentGui(Frame, object):
 
         self.previous_best_segment = segment.best_segment
 
-        self.name     = Label(self, text=segment.name, bg='white', width=30, height=1)
+        self.name     = Label(self, text=segment.name, bg='white', width=25, height=1, padx=10)
         self.csegment = Label(self, text=segment.time_segment, bg='white', width=15, height=1)
-        self.btwsegment=Label(self, text="", bg="white", width=6, height=1)
-        self.bsegment = Label(self, text="best: "+segment.get_best_segment_str(), bg='white', width=30, height=1)
+        self.btwsegment=Label(self, text="", bg="white", width=6, height=1, padx=10)
+        self.bsegment = Label(self, text="best: "+segment.get_best_segment_str(), bg='white', width=25, height=1)
 
         self.name.grid(row=0, column=0, pady=5)
         self.csegment.grid(row=0, column=1)

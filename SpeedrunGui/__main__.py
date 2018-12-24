@@ -29,7 +29,7 @@ class TkFrame():
         self.fenetre = Tk()
 
         self.fenetre.title('SpeedrunerGui Project')
-        self.fenetre.geometry("550x700")
+        self.fenetre.geometry("550x500")
         self.fenetre.resizable(0, 0)
 
         self.initialise_speedrun(FileLoaderModel().getProfils()[0])
@@ -44,17 +44,22 @@ class TkFrame():
 
         self.speedrun_gui = LoadSpeedrunGui(self.fenetre, self.speedrun)
         self.option_gui   = OptionsGui(self.fenetre, self)
+        self.timer_abstract_gui = Timer(self.fenetre)
         self.timer_gui    = Timer(self.fenetre)
 
         self.speedrun_gui.grid(row=1, column=0)
         self.option_gui.grid(row=2, column=0)
         self.timer_gui.grid(row=3, column=0)
+        self.timer_abstract_gui.grid(row=4, column=0)
 
     def event_save(self):
         self.speedrun.save()
 
     def event_start(self):
+        self.speedrun.run()
         self.timer_gui.run()
+        self.timer_abstract_gui.run()
+        self.speedrun_gui.event_next()
 
     def event_stop(self):
         self.timer_gui.stop()
@@ -72,13 +77,12 @@ class TkFrame():
     def next_action(self, key):
 
         if self.speedrun.is_waiting():
-            self.speedrun.run()
             self.event_start()
-            self.speedrun_gui.event_next()
 
         elif self.speedrun.is_running():
             try:
                 self.speedrun_gui.event_next(self.timer_gui.getTime())
+                self.timer_abstract_gui.restart()
             except:
                 self.speedrun.done()
                 self.event_stop()

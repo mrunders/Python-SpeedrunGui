@@ -38,3 +38,8 @@ class Timer(Frame, object):
 
     def breakt(self):
         self.is_active = not self.is_active
+
+    def restart(self):
+        self.time[0] = 0
+        self.time[1] = 0
+        self.time[2] = 0
