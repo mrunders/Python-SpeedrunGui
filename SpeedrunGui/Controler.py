@@ -43,6 +43,9 @@ class Speedrun():
 
         commiter.commit_changes()
 
+    def reset(self, profil):
+        self.__init__(profil)
+
     def get_segment(self, id):
         return self.segments[id]
 

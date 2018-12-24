@@ -16,9 +16,8 @@ class OptionsGui(Frame, object):
         super(OptionsGui, self).__init__(parent)
 
         self.start = Button(self, text="Start", command=controler.event_start)
-        Button(self, text="Break", command=lambda: None).grid(row=0, column=1)
         Button(self, text="Stop",  command=controler.event_stop).grid(row=0, column=2)
-        Button(self, text="Reset", command=lambda: None).grid(row=0, column=3)
+        Button(self, text="Reset", command=controler.event_reset).grid(row=0, column=3)
         self.save  = Button(self, text="Save" , command=controler.event_save)
 
         self.start.grid(row=0, column=0)
@@ -59,6 +58,16 @@ class TkFrame():
 
     def event_stop(self):
         self.timer_gui.stop()
+
+    def event_break(self):
+        self.timer_gui.breakt()
+
+    def event_reset(self):
+        self.timer_gui.stop()
+        self.speedrun_gui.destroy()
+        self.option_gui.destroy()
+        self.timer_gui.destroy()
+        self.initialise_speedrun(FileLoaderModel().getProfils()[0])
 
     def next_action(self, key):
 

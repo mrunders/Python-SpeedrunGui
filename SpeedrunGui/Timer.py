@@ -35,3 +35,6 @@ class Timer(Frame, object):
 
     def stop(self):
         self.is_active = False
+
+    def breakt(self):
+        self.is_active = not self.is_active
