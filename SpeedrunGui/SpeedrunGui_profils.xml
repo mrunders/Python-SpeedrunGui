@@ -6,15 +6,15 @@
         <img>img</img>
         <data>
             <level id="0" name="Sunny Flight" best-segment="00:02:35"/>
-            <level id="1" name="Dark Hollow" best-segment="00:02:55"/>
-            <level id="2" name="Stone Hill" best-segment="00:03:37"/>
-            <level id="3" name="Town Square" best-segment="00:03:26"/>
-            <level id="4" name="Toasty" best-segment="00:02:46"/>
-            <level id="5" name="Artisants" best-segment="00:00:38"/>
-            <level id="6" name="Dry Canyon" best-segment="00:05:35"/>
-            <level id="7" name="Cliff Town" best-segment="00:05:07"/>
-            <level id="8" name="Doctor Shemp" best-segment="00:03:48"/>
-            <level id="9" name="Night Flight" best-segment="00:02:25"/>
+            <level id="1" name="Dark Hollow" best-segment="00:05:30"/>
+            <level id="2" name="Stone Hill" best-segment="00:09:07"/>
+            <level id="3" name="Town Square" best-segment="00:12:33"/>
+            <level id="4" name="Toasty" best-segment="00:15:19"/>
+            <level id="5" name="Artisants" best-segment="00:15:57"/>
+            <level id="6" name="Dry Canyon" best-segment="00:21:32"/>
+            <level id="7" name="Cliff Town" best-segment="00:26:39"/>
+            <level id="8" name="Doctor Shemp" best-segment="00:30:27"/>
+            <level id="9" name="Night Flight" best-segment="00:32:52"/>
             <level id="10" name="Ice Cavern" best-segment=""/>
             <level id="11" name="Peace Keepers" best-segment=""/>
         </data>
