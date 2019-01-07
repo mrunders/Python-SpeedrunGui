@@ -2,8 +2,10 @@ import platform
 
 if platform.system() == "Windows":
     from Tkinter import *
+    FRAME_SIZE = "550x500"
 else :
     from tkinter import *
+    FRAME_SIZE = "600x500"
 
 from FileLoarderGui import *
 from Controler import *
@@ -29,7 +31,7 @@ class TkFrame():
         self.fenetre = Tk()
 
         self.fenetre.title('SpeedrunerGui Project')
-        self.fenetre.geometry("550x500")
+        self.fenetre.geometry(FRAME_SIZE)
         self.fenetre.resizable(0, 0)
 
         self.initialise_speedrun(FileLoaderModel().getProfils()[0])
@@ -39,18 +41,15 @@ class TkFrame():
     def initialise_speedrun(self, data):
 
         self.speedrun = Speedrun(data)
-
         self.fenetre.bind('<Key>', self.next_action)
 
         self.speedrun_gui = LoadSpeedrunGui(self.fenetre, self.speedrun)
         self.option_gui   = OptionsGui(self.fenetre, self)
-        self.timer_abstract_gui = Timer(self.fenetre)
-        self.timer_gui    = Timer(self.fenetre)
+        self.timer_gui = DoubleTimer(self.fenetre)
 
         self.speedrun_gui.grid(row=1, column=0)
         self.option_gui.grid(row=2, column=0)
         self.timer_gui.grid(row=3, column=0)
-        self.timer_abstract_gui.grid(row=4, column=0)
 
     def event_save(self):
         self.speedrun.save()
@@ -58,7 +57,6 @@ class TkFrame():
     def event_start(self):
         self.speedrun.run()
         self.timer_gui.run()
-        self.timer_abstract_gui.run()
         self.speedrun_gui.event_next()
 
     def event_stop(self):
@@ -81,8 +79,8 @@ class TkFrame():
 
         elif self.speedrun.is_running():
             try:
-                self.speedrun_gui.event_next(self.timer_gui.getTime())
-                self.timer_abstract_gui.restart()
+                self.speedrun_gui.event_next(self.timer_gui.get_current_time())
+                self.timer_gui.next()
             except:
                 self.speedrun.done()
                 self.event_stop()

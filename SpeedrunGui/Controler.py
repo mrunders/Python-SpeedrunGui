@@ -16,11 +16,11 @@ class Speedrun():
         self.current_segment = -1
 
     def update_segment(self, level_id, datetime_segment):
-        datetimel = Segment.minus(datetime_segment, self.previous_segment)
-        self.get_segment(level_id).time_segment = datetimel
+        ## datetimel = Segment.minus(datetime_segment, self.previous_segment)
+        self.get_segment(level_id).time_segment = datetime_segment
 
-        if datetimel < self.get_segment(level_id).best_segment:
-            self.get_segment(level_id).best_segment = datetimel
+        if datetime_segment < self.get_segment(level_id).best_segment:
+            self.get_segment(level_id).best_segment = datetime_segment
         
         self.previous_segment = datetime_segment
 
